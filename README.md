@@ -1,6 +1,6 @@
-# Chall - Your Challenge Title
+# Chall - UIDentity Crises
 
-> A brief description of the challenge
+> RFID challenge #1 - Participants have a USB reader, and an empty Mifare classic 1k card, with UID rewritable. They must change the UID of their card to impersonate the admin and get the flag.
 
 ## Type
 
@@ -9,30 +9,15 @@
 
 ## Designer(s)
 
-- Ada Lovelace
-- Barbara Liskov
+- Hugo Kermabon-Bobinnec
 
 ## Description
 
-A high-level overview intended to clarify the concept and intuition behind the challenge, outlining its educational
-goals and the skills it aims to test in participants.
-
-**IMPORTANT:** This description will **NOT** be shared with participants.
+Back in old days, some access card only used the UID of the card (hardcoded by the constructor) to authenticate someone. Nowadays, some cards have their UID writable, meaning that it's easy to bypass such authentications.
 
 ## Category(ies)
 
-- `pwn`
-- `re`
-- `web`
-- `stegano`
 - `env`
-- `crypto`
-- `osint`
-- `web3`
-- `ai`
-- `android`
-- `auto`
-- `misc`
 
 ---
 

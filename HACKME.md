@@ -1,10 +1,7 @@
-The description of your challenge as seen by participants in CTFd. Try to make it feel within the theme
-of the event...
+Apparently, you can now use an access card to fetch your university messages! They did that because people kept on forgetting their password. You can go test the new system downstairs.
 
----
-If your challenge is a multi-flag one (i.e., it consists of a sequence of sub-challenges each rewarded with
-its own flag), requiring a different description for each sub-challenge, then have your descriptions split as 
-done with this paragraph, and the next one.
+I heard that Roger received an important message this morning. Try to impersonate him and see what's there. It should not be too difficult: they literally just check the ID of the card to give you access!
 
----
-Obviously, for each sub-challenge, you should provide its flag value in [solution/FLAGS.md](solution/FLAGS.md).
+NOTE: Back in high-school, I used to run an underground parking pass traffic using that technique... but don't tell anyone
+
+NOTE: <put instructions here>

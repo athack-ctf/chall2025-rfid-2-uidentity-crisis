@@ -1,6 +1,7 @@
 import curses
 import time
 from pyfiglet import Figlet
+import art
 from smartcard.System import readers
 from smartcard.util import toHexString
 from smartcard.CardConnection import CardConnection
@@ -11,6 +12,11 @@ DEFAULT_KEY = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
 # TARGET_UID = "04 D3 7A 1F 88 68 80"  # Replace with the UID to check against
 TARGET_UID = "6C DC 2E 03 07 4F 0C"
 
+
+FLAG_FONT = "doom"
+DEFAULT_FONT = "standard"
+
+DURATION = 5
 
 def draw_ascii_text(stdscr, ascii_art, y):
     max_width = curses.COLS - 2
@@ -42,15 +48,18 @@ def draw_border(stdscr):
     stdscr.addch(height - 2, 1, '+')  # Bottom-left corner
     stdscr.addch(height - 2, width - 2, '+')  # Bottom-right corner
 
-def scroll_message(stdscr, scroll, speed=30):
 
-    big = Figlet(font='big')  # Choose a large ASCII font
-    mailbox = big.renderText("Mailbox").split('\n')
+
+def scroll_message(stdscr, scroll, header="", speed=20):
+
+    mailbox = art.text2art("Mailbox", font=DEFAULT_FONT).split('\n')
 
     message_len = max([len(row) for row in scroll])
 
     scroll_height = curses.LINES // 2
-    scroll_pos = 10
+    scroll_pos = 2
+
+    start_time = time.time()
 
     while True:
         stdscr.erase()
@@ -58,16 +67,18 @@ def scroll_message(stdscr, scroll, speed=30):
         draw_border(stdscr)
 
         draw_ascii_text(stdscr, mailbox, 3)
+
+        stdscr.addstr(13, (curses.COLS - len(header)) // 2, header, curses.A_BOLD)
     
         # Draw scrolling message safely
         for index, line in enumerate(scroll):
-            overflow = message_len + scroll_pos - (curses.COLS - 1)
+            overflow = message_len + scroll_pos - (curses.COLS - 2)
             if (overflow > 0):
                 displayed_line = line[:-overflow]
                 overflowed_line = line[-overflow:]
 
-                stdscr.addstr(index + scroll_height, 1, overflowed_line)
                 stdscr.addstr(index + scroll_height, scroll_pos, displayed_line)
+                stdscr.addstr(index + scroll_height, 2, overflowed_line)
             else:
                 displayed_line = line
                 stdscr.addstr(index + scroll_height, scroll_pos, displayed_line)
@@ -83,6 +94,24 @@ def scroll_message(stdscr, scroll, speed=30):
 
         time.sleep(1/speed)
 
+        elapsed_time = time.time() - start_time
+        
+        if elapsed_time > DURATION:
+            return
+
+
+def read_uid(connection):
+    connection.connect(CardConnection.T0_protocol | CardConnection.T1_protocol)
+
+    # Read UID (Block 0)
+    read_uid_apdu = [0xFF, 0xCA, 0x00, 0x00, 0x07]
+    response, sw1, sw2 = connection.transmit(read_uid_apdu)
+
+    if sw1 == 0x90 and sw2 == 0x00:
+        uid = toHexString(response)
+        return uid
+    else:
+        return 0
 
 
 # Helper function to load a key into the ACR122U's key storage
@@ -94,6 +123,13 @@ def load_key(card_connection, key_number):
     else:
         raise Exception(f"Failed to load key (SW1={sw1:02X}, SW2={sw2:02X}).")
     
+def print_welcome(stdscr):
+    draw_border(stdscr)
+    ascii_art = art.text2art("Log in with access card", font=DEFAULT_FONT).split('\n')
+    draw_ascii_text(stdscr, ascii_art, curses.LINES // 4)
+
+    stdscr.refresh()
+
 
 
 def main(stdscr):
@@ -116,47 +152,30 @@ def main(stdscr):
     stdscr.clear()
     
 
-    draw_border(stdscr)
-
-    f = Figlet(font='big')  # Choose a large ASCII font
-    ascii_art = Figlet(font='big').renderText("Log in with access card").split('\n')
-    draw_ascii_text(stdscr, ascii_art, curses.LINES // 4)
-
-    stdscr.refresh()
+    print_welcome(stdscr)
 
     while True:
         try:
-            connection.connect(CardConnection.T0_protocol | CardConnection.T1_protocol)
+            uid = read_uid(connection)
             
-            # Read UID (Block 0)
-            read_uid_apdu = [0xFF, 0xCA, 0x00, 0x00, 0x07]
-            response, sw1, sw2 = connection.transmit(read_uid_apdu)
-            
-            if sw1 == 0x90 and sw2 == 0x00:
-                uid = toHexString(response)
-                # print(f"Card UID: {uid}")
+            if uid == TARGET_UID:
+                scroll = art.text2art(flag, font=FLAG_FONT).split('\n')
+                header = f"Logged in with UID: {uid}"
+                scroll_message(stdscr, scroll, header=header)
 
-                # stdscr.clear()
-
-                if uid == TARGET_UID:
-                    ntgreek = Figlet(font='doom', width = 400)  # Choose a large ASCII font
-                    scroll = ntgreek.renderText(flag).split('\n')
-
-                    scroll_message(stdscr, scroll)
-
-                else:
-                    scroll = [f"Wrong UID: {uid}"]
-                    scroll_message(stdscr, scroll, speed=10)
-            
-            time.sleep(5)  # Wait 5 seconds before continuing
+            else:
+                scroll = art.text2art("No new messages...", font="varsity").split('\n')
+                header = f"Logged in with UID: {uid}"
+                scroll_message(stdscr, scroll, header=header)
+        
+            stdscr.clear()
+            print_welcome(stdscr)
+            time.sleep(3)
         except Exception as e:
             # print(f"Error: {e}")
             time.sleep(1)  # Short delay before retrying
 
-
-    stdscr.clear()
-    scroll_message(stdscr)
-    
+  
     
    
 

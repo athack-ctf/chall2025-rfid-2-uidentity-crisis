@@ -1,11 +1,10 @@
-# Building Your Challenge
+`pip install -r requirements.txt`
+`python main.py`
 
-The purpose of this directory is to provide a reproducible way of rebuilding your challenge.
+--> resize the terminal so that it shows the entire flag as well as "no new message" completely (zoom out).
 
-- If your challenge can be programmatically rebuilt, treat this directory as the root of the source code.
+Do NOT leave keyboard, mouse of computer access. Just a screen.
 
-- If your process is mainly manual, then it should be documented, along with all necessary files.
 
-- If you have used a special tool (e.g., a file encoding tool) to build the challenge, it should be documented as well.
-
-- For any clarifications, consult us (Anis and Hugo).
+`sudo apt install libusb-dev`
+compile libnfc by hand
