@@ -9,8 +9,8 @@ import time
 
 
 DEFAULT_KEY = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
-# TARGET_UID = "04 D3 7A 1F 88 68 80"  # Replace with the UID to check against
-TARGET_UID = "6C DC 2E 03 07 4F 0C"
+# TARGET_UID = "04 D3 7A 1F"  # Replace with the UID to check against
+TARGET_UID = "6C DC 2E 03"
 
 
 FLAG_FONT = "doom"
@@ -104,7 +104,7 @@ def read_uid(connection):
     connection.connect(CardConnection.T0_protocol | CardConnection.T1_protocol)
 
     # Read UID (Block 0)
-    read_uid_apdu = [0xFF, 0xCA, 0x00, 0x00, 0x07]
+    read_uid_apdu = [0xFF, 0xCA, 0x00, 0x00, 0x04]
     response, sw1, sw2 = connection.transmit(read_uid_apdu)
 
     if sw1 == 0x90 and sw2 == 0x00:
@@ -170,7 +170,7 @@ def main(stdscr):
         
             stdscr.clear()
             print_welcome(stdscr)
-            time.sleep(3)
+            time.sleep(1)
         except Exception as e:
             # print(f"Error: {e}")
             time.sleep(1)  # Short delay before retrying
