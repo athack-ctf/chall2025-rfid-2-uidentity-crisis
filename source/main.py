@@ -10,13 +10,13 @@ import time
 
 DEFAULT_KEY = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
 # TARGET_UID = "04 D3 7A 1F"  # Replace with the UID to check against
-TARGET_UID = "6C DC 2E 03"
+TARGET_UID = [0xDE, 0xAD, 0xBE, 0xEF]
 
 
 FLAG_FONT = "doom"
 DEFAULT_FONT = "standard"
 
-DURATION = 5
+DURATION = 7 # seconds
 
 def draw_ascii_text(stdscr, ascii_art, y):
     max_width = curses.COLS - 2
@@ -108,7 +108,7 @@ def read_uid(connection):
     response, sw1, sw2 = connection.transmit(read_uid_apdu)
 
     if sw1 == 0x90 and sw2 == 0x00:
-        uid = toHexString(response)
+        uid = response
         return uid
     else:
         return 0
@@ -157,15 +157,15 @@ def main(stdscr):
     while True:
         try:
             uid = read_uid(connection)
+            uid_print = int.from_bytes(uid, byteorder='big')
+            header = f"Logged in with UID: {uid_print}"
             
             if uid == TARGET_UID:
                 scroll = art.text2art(flag, font=FLAG_FONT).split('\n')
-                header = f"Logged in with UID: {uid}"
                 scroll_message(stdscr, scroll, header=header)
 
             else:
                 scroll = art.text2art("No new messages...", font="varsity").split('\n')
-                header = f"Logged in with UID: {uid}"
                 scroll_message(stdscr, scroll, header=header)
         
             stdscr.clear()
