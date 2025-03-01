@@ -4,4 +4,4 @@ I heard that Roger received an important message this morning. Try to impersonat
 
 NOTE: Back in high-school, I used to run an underground parking pass traffic using that technique... but don't tell anyone
 
-NOTE: <put instructions here>
+NOTE: []
