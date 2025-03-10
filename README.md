@@ -7,7 +7,7 @@
 - [X] **OFF**line
 - [ ] **ON**line
 
-## Designer(s)
+## Designer
 
 - Hugo Kermabon-Bobinnec
 
