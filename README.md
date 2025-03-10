@@ -1,6 +1,6 @@
 # Chall - UIDentity Crises
 
-> RFID challenge #1 - Participants have a USB reader, and an empty Mifare classic 1k card, with UID rewritable. They must change the UID of their card to impersonate the admin and get the flag.
+> RFID challenge #2 - Participants have a USB reader, and an empty Mifare classic 1k card, with UID rewritable. They must change the UID of their card to impersonate the admin and get the flag.
 
 ## Type
 
