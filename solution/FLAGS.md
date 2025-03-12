@@ -1,2 +1,2 @@
 # FLAGS
-`ATHACKCTF{Sp00fingUIDz}`
+- `ATHACKCTF{Sp00fingUIDz}`

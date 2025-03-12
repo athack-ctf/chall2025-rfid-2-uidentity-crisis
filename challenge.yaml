@@ -1,6 +1,6 @@
-name: "RFID 2 - UIDentity Crisis "
+name: "RFID 2 - UIDentity Crisis"
 author: "Hugo"
-category: <Hardware>
+category: Hardware
 description: |
     Apparently, you can now use an access card to fetch your university messages! They did that because people kept on forgetting their password. You can go test the new system downstairs.
 
@@ -18,7 +18,7 @@ flags:
     data: "case_insensitive"
 
 tags:
-    - interac
+    - sponsored
 
 state: visible
 
