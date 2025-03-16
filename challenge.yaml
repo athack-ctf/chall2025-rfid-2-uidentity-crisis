@@ -20,6 +20,9 @@ flags:
 tags:
     - sponsored
 
+files:
+  - offline-artifacts/id.jpg
+
 state: visible
 
 version: "0.1"
