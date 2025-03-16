@@ -1,20 +1,53 @@
-# Chall - UIDentity Crises
+# @HACK 2025: RFID 2 - UIDentity Crisis
 
-> RFID challenge #2 - Participants have a USB reader, and an empty Mifare classic 1k card, with UID rewritable. They must change the UID of their card to impersonate the admin and get the flag.
+> Authored by [Hugo](https://github.com/hkerma).
 
-## Type
+- **Category**: `Hardware`
+- **Value**: `500 points`
+- **Tags**: `sponsored`
 
-- [X] **OFF**line
-- [ ] **ON**line
+> Apparently, you can now use an access card to fetch your university messages! They did that because people kept on forgetting their password. You can go test the new system downstairs.
+> 
+> I heard that Roger received an important message this morning. Try to impersonate him and see what's there. It should not be too difficult: they literally just check the ID of the card to give you access!
+> 
+> > Back in high-school, I used to run an underground parking pass traffic using that technique... but don't tell anyone
+> 
+> ## About the Automatic Terrible Machine (ATM)
+> At @HACK 2025, participants hacked a dystopian ATM machine that operates on RFID cards. 
+> Since this challenge requires a physical setup, we're sharing it - and the included pictures - as a fun throwback. 
+> We published all utilities used to create and operate all ATM challenges [here](https://github.com/athack-ctf/chall2025-atm-rfid-utilities).
+> 
 
-## Designer
+## Files
+- **[Download: id.jpg](https://github.com/athack-ctf/chall2025-rfid-2-uidentity-crisis/raw/refs/heads/main/offline-artifacts/id.jpg)**
+- **[Download: throwback-the-bulletproofs.jpg](https://github.com/athack-ctf/chall2025-rfid-2-uidentity-crisis/raw/refs/heads/main/offline-artifacts/throwback-the-bulletproofs.jpg)**
+- **[Download: throwback-wannabe-debit-cards.jpg](https://github.com/athack-ctf/chall2025-rfid-2-uidentity-crisis/raw/refs/heads/main/offline-artifacts/throwback-wannabe-debit-cards.jpg)**
 
-- Hugo Kermabon-Bobinnec
+## Reveal Flag
 
-## Description
+Did you try solving this challenge?
+<details>
+<summary>
+Yes
+</summary>
 
-Back in old days, some access card only used the UID of the card (hardcoded by the constructor) to authenticate someone. Nowadays, some cards have their UID writable, meaning that it's easy to bypass such authentications.
+Did you **REALLY** try solving this challenge?
 
-## Category
+<details>
+<summary>
+Yes, I promise!
+</summary>
 
-- `env`
+Flag: `ATHACKCTF{Sp00fingUIDz}`
+
+</details>
+</details>
+
+
+---
+
+## About @HACK
+[@HACK](https://athackctf.com/) is an annual CTF (Capture The Flag) competition hosted by [HEXPLOIT ALLIANCE](https://hexploit-alliance.com/) and [TECHNATION](https://technationcanada.ca/) at Concordia University in Montreal, Canada.
+
+---
+[Check more challenges from @HACK 2025](https://github.com/athack-ctf/AtHackCTF-2025-Challenges).
